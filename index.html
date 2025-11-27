@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Moai Searcher</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png"
+            href="https://emojitool.com/img/whatsapp/2.19.352/moai-2543.png">
+        <icon></icon>
+    </head>
+    <body>
+
+        <div id="intro-screen" class="screen">
+            <div class="input-group">
+                <input type="text" id="player-input"
+                    placeholder="Moai needs Username or ID"
+                    autocomplete="off">
+            </div>
+
+            <img id="moai-trigger"
+                src="https://emojitool.com/img/whatsapp/2.19.352/moai-2543.png"
+                alt="Click here :D">
+
+            <p class="instruction">Click the Moai after typing</p>
+        </div>
+
+        <div id="game-screen" class="screen hidden">
+            <div id="bg-back" class="bg-layer"></div>
+            <div id="bg-front" class="bg-layer"></div>
+
+            <div id="loading-status">
+                Pesquisando: <span id="display-player-name"
+                    style="color: #4CAF50">...</span><br>
+                Runs Baixadas: <span id="runs-counter">0</span> / <span
+                    id="runs-total">?</span><br>
+                Bioma: <span id="current-biome-name">Floresta</span>
+            </div>
+
+            <div id="cat-container">
+                <img id="cat-meme"
+                    src="https://static.wikia.nocookie.net/meme/images/a/aa/Maxwell_the_Cat.png/revision/latest/thumbnail/width/360/height/360?cb=20241223203209"
+                    alt="Gatinho">
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <div class="results-wrapper">
+                <img id="high-five-cat"
+                    src="https://static.vecteezy.com/system/resources/previews/055/450/557/non_2x/cat-giving-a-high-five-while-looking-at-the-camera-against-a-white-background-cat-giving-high-five-look-on-camera-isolated-white-background-free-png.png"
+                    alt="High Five">
+
+                <div class="table-container">
+                    <h2 style="margin-top: 0; color: #333;">Relatório Final</h2>
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th>Estatística</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                    <button onclick="location.reload()"
+                        style="margin-top: 20px; width: 100%; padding: 15px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem;">Nova
+                        Pesquisa</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
