@@ -222,8 +222,8 @@ async function fetchAndAnimateRuns() {
                         if (run.levelId) user.ils += 1;
                         else user.full_game += 1;
                         if (run.playerIds.length > 1) user.co_op_runs += 1;
-                        updateUI();
                     });
+                    updateUI();
                     keepFetching = false;
                 }
             }
