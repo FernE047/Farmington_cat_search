@@ -222,7 +222,7 @@ async function fetchAndAnimateRuns() {
                     user.co_op_runs = 0;
                     updateUI();
                     searchData.runs.forEach((run) => {
-                        if (run.level === null) user.ils += 1;
+                        if (run.levelId !== null) user.ils += 1;
                         else user.full_game += 1;
                         if (run.playerIds.length > 1) user.co_op_runs += 1;
                         updateUI();
