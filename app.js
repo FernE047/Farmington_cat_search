@@ -28,6 +28,7 @@ const API_OFFSET = 100;
 const BIOME_CHANGE_THRESHOLD = 1000;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+let isSearching = false;
 let currentBiomeIndex = 0;
 
 const biomes = [
@@ -71,6 +72,7 @@ playerInput.addEventListener("keypress", (e) => {
 });
 
 async function validateAndStart() {
+    if (isSearching) return;
     user.name = "";
     user.id = "";
     user.runs = 0;
@@ -89,6 +91,7 @@ async function validateAndStart() {
         playerInput.focus();
         return;
     }
+    deactivate_moai();
 
     try {
         const userUrl = `${API_BASE}/users/${encodeURIComponent(user.name)}`;
@@ -166,7 +169,8 @@ async function fetchAndAnimateRuns() {
                 user.games.add(run.game);
                 user.categories.add(run.category);
                 user.levels.add(run.level);
-                user.platforms.add(run.platform);
+                const platform = run.system.platform;
+                if (platform !== null) user.platforms.add(platform);
             });
 
             checkBiomeTransition();
@@ -242,4 +246,15 @@ function populateTable() {
         let row = `<tr><td>${item.cat}</td><td><strong>${item.val}</strong></td></tr>`;
         tableBody.innerHTML += row;
     });
+    activate_moai();
+}
+
+function deactivate_moai() {
+    isSearching = true;
+    moaiTrigger.classList.add("disabled-moai");
+}
+
+function activate_moai() {
+    isSearching = false;
+    moaiTrigger.classList.remove("disabled-moai");
 }

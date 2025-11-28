@@ -221,3 +221,9 @@ th {
         width: 140px;
     }
 }
+
+.disabled-moai {
+    pointer-events: none;
+    opacity: 0.8;
+    cursor: default;
+}
