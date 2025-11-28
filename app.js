@@ -196,6 +196,36 @@ async function fetchAndAnimateRuns() {
                     direction = "desc";
                     offset = 0;
                     runsId = runs.map((run) => run.id);
+                } else {
+                    const runsResponse = await fetch(
+                        `http://speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
+                    );
+
+                    await new Promise((resolve) => setTimeout(resolve, 500));
+
+                    if (!runsResponse.ok) {
+                        throw new Error(
+                            `API Fetch failed with status: ${runsResponse.status}`
+                        );
+                    }
+
+                    const searchData = await runsResponse.json();
+                    user.runs = searchData.runs.length;
+                    user.categories = searchData.categories.length;
+                    user.games = searchData.games.length;
+                    user.levels = searchData.levels.length;
+                    user.platforms = searchData.platforms.length;
+                    user.ils = 0;
+                    user.full_game = 0;
+                    user.co_op_runs = 0;
+                    updateUI();
+                    searchData.runs.forEach((run) => {
+                        if (run.level === null) user.ils += 1;
+                        else user.full_game += 1;
+                        if (run.playerIds.length > 1) user.co_op_runs += 1;
+                        updateUI();
+                    });
+                    keepFetching = false;
                 }
             }
         } catch (error) {
