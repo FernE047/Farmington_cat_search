@@ -140,9 +140,11 @@ function setupInitialBiomes() {
 async function fetchAndAnimateRuns() {
     let offset = 0;
     let keepFetching = true;
+    let direction = "asc";
+    let runsId = [];
 
     while (keepFetching) {
-        const runsUrl = `${API_BASE}/runs?status=verified&user=${user.id}&max=${MAX_RUNS_PER_PAGE}&offset=${offset}`;
+        const runsUrl = `${API_BASE}/runs?status=verified&user=${user.id}&max=${MAX_RUNS_PER_PAGE}&offset=${offset}&orderby=date&direction=${direction}`;
 
         try {
             const runsResponse = await fetch(runsUrl);
@@ -156,7 +158,9 @@ async function fetchAndAnimateRuns() {
             }
 
             const runsData = await runsResponse.json();
-            const runs = runsData.data;
+            const runs = runsData.data.filter(
+                (run) => !runsId.includes(run.id)
+            );
 
             user.runs += runs.length;
             user.ils += runs.filter((run) => run.level !== null).length;
@@ -176,10 +180,14 @@ async function fetchAndAnimateRuns() {
             checkBiomeTransition();
             updateUI();
 
-            if (runs.length < MAX_RUNS_PER_PAGE) {
-                keepFetching = false;
-            } else {
-                offset += MAX_RUNS_PER_PAGE;
+            if (runs.length < MAX_RUNS_PER_PAGE) keepFetching = false;
+            else offset += MAX_RUNS_PER_PAGE;
+            if (offset == 10000) {
+                if (direction == "asc") {
+                    direction = "desc";
+                    offset = 0;
+                    runsId = runs.map((run) => run.id);
+                }
             }
         } catch (error) {
             console.error("Erro durante a busca de runs:", error);
