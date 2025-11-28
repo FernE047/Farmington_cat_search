@@ -197,8 +197,11 @@ async function fetchAndAnimateRuns() {
                     offset = 0;
                     runsId = runs.map((run) => run.id);
                 } else {
+                    console.log(
+                        `https://speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
+                    );
                     const runsResponse = await fetch(
-                        `http://speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
+                        `https://speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
                     );
 
                     await new Promise((resolve) => setTimeout(resolve, 500));
