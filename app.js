@@ -265,7 +265,7 @@ function triggerBiomeFade() {
     bgFront.classList.add("fade-out");
 
     setTimeout(() => {
-        bgFront.style.backgroundImage = `url('${nextBiome.url}')`;
+        bgFront.style.backgroundImage = `url('${nextBiome}')`;
         bgFront.classList.remove("fade-out");
 
         currentBiomeIndex = nextBiomeIndex;
