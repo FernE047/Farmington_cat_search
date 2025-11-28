@@ -213,10 +213,10 @@ async function fetchAndAnimateRuns() {
 
                     const searchData = await runsResponse.json();
                     user.runs = searchData.runs.length;
-                    user.categories = searchData.categories.length;
-                    user.games = searchData.games.length;
-                    user.levels = searchData.levels.length;
-                    user.platforms = searchData.platforms.length;
+                    user.categories = { size: searchData.categories.length };
+                    user.games = { size: searchData.games.length };
+                    user.levels = { size: searchData.levels.length };
+                    user.platforms = { size: searchData.platforms.length };
                     user.ils = 0;
                     user.full_game = 0;
                     user.co_op_runs = 0;
