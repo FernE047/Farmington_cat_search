@@ -196,9 +196,6 @@ async function fetchAndAnimateRuns() {
                     offset = 0;
                     runsId = runs.map((run) => run.id);
                 } else {
-                    console.log(
-                        `https://www.speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
-                    );
                     const runsResponse = await fetch(
                         `https://www.speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
                     );
@@ -222,7 +219,7 @@ async function fetchAndAnimateRuns() {
                     user.co_op_runs = 0;
                     updateUI();
                     searchData.runs.forEach((run) => {
-                        if (run.levelId !== null) user.ils += 1;
+                        if (run.levelId) user.ils += 1;
                         else user.full_game += 1;
                         if (run.playerIds.length > 1) user.co_op_runs += 1;
                         updateUI();
