@@ -93,7 +93,6 @@ async function validateAndStart() {
     user.platforms = new Set();
     user.co_op_runs = 0;
     const name = playerInput.value.trim();
-    console.log(name);
     user.name = name;
     if (!name) {
         alert("Por favor, digite o nome do player!");
@@ -198,10 +197,10 @@ async function fetchAndAnimateRuns() {
                     runsId = runs.map((run) => run.id);
                 } else {
                     console.log(
-                        `https://speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
+                        `https://www.speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
                     );
                     const runsResponse = await fetch(
-                        `https://speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
+                        `https://www.speedrun.com/api/v2/GetUserLeaderboard?userId=${user.id}`
                     );
 
                     await new Promise((resolve) => setTimeout(resolve, 500));
