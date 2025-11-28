@@ -52,7 +52,16 @@ const playerInput = document.getElementById("player-input");
 const moaiTrigger = document.getElementById("moai-trigger");
 
 const displayPlayerName = document.getElementById("display-player-name");
-const runsCounterSpan = document.getElementById("runs-counter");
+const counterSpans = {
+    runs: document.getElementById("runs-counter"),
+    games: document.getElementById("games-counter"),
+    categories: document.getElementById("categories-counter"),
+    ils: document.getElementById("ils-counter"),
+    full_game: document.getElementById("full_game-counter"),
+    levels: document.getElementById("levels-counter"),
+    platforms: document.getElementById("platforms-counter"),
+    co_op_runs: document.getElementById("co_op_runs-counter"),
+};
 const bgFront = document.getElementById("bg-front");
 const bgBack = document.getElementById("bg-back");
 const tableBody = document.getElementById("table-body");
@@ -201,7 +210,14 @@ async function fetchAndAnimateRuns() {
 }
 
 function updateUI() {
-    runsCounterSpan.innerText = user.runs;
+    counterSpans.runs.innerText = user.runs;
+    counterSpans.games.innerText = user.games.size;
+    counterSpans.categories.innerText = user.categories.size;
+    counterSpans.ils.innerText = user.ils;
+    counterSpans.full_game.innerText = user.full_game;
+    counterSpans.levels.innerText = user.levels.size;
+    counterSpans.platforms.innerText = user.platforms.size;
+    counterSpans.co_op_runs.innerText = user.co_op_runs;
 }
 
 function checkBiomeTransition() {
